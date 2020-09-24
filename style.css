@@ -39,7 +39,7 @@ main {
 .number-button {
     font-size: 3em;
     display: flex;
-    background-color: cornsilk;
+    background-color: rgb(253, 249, 241);
     border: 1px solid black;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ main {
 }
 
 .number-button:hover {
-    background-color: rgb(255, 230, 130);
+    background-color: rgb(252, 237, 176);
     cursor: pointer;
 }
 

@@ -6,11 +6,11 @@ const clearButton = document.querySelector('#clear');
 const equalsButton = document.querySelector('#equals-button');
 const deleteButton = document.querySelector('#delete-button');
 const decimalButton = document.querySelector('#decimal-button');
-let temp = 0; //Stores user's input
+let temp; //Stores user's input
 let lock = false; //when false, clicking operators won't run operate function
 let operator;    //Stores the desired operation
 let numClear = true;  //If true, clicking a number will clear the screen
-let answer = 0
+let answer
 
 screen.textContent = '0'
 
@@ -61,7 +61,7 @@ deleteButton.addEventListener('click', () => {
     }
 })
 decimalButton.addEventListener('click', () => {
-    if (numClear) {
+    if (numClear && screen.textContent != 0) {
         screen.textContent = '';
     }
     if (!screen.textContent.includes('.')) {
