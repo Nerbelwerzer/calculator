@@ -12,7 +12,6 @@
 
         main {
             text-align: center;
-            margin: auto;
         }
 
         #screen {
@@ -93,7 +92,7 @@
         }
 
         #delete-button {
-            font-size: 50px;
+            font-size: 40px;
             display: flex;
             background-color: rgb(117, 187, 245);
             border: 1px solid black;
@@ -110,7 +109,7 @@
 
         .equals-button {
             grid-column: span 2;
-            background-color: rgb(238, 196, 255);
+            background-color: rgb(171, 140, 255);
             font-size: 50px;
             display: flex;
             border: 1px solid black;
@@ -119,7 +118,7 @@
         }
 
         .equals-button:hover {
-            background-color: rgb(212, 142, 231);
+            background-color: rgb(137, 95, 185);
             cursor: pointer;
         }
 
@@ -191,9 +190,10 @@
         const equalsButton = document.querySelector('#equals-button');
         const deleteButton = document.querySelector('#delete-button');
         const decimalButton = document.querySelector('#decimal-button');
-        let current = 0; //Stores the initial input
+        let temp = 0; //Stores user's input
+        let lock = false; //when false, clicking operators won't run operate function
         let operator;    //Stores the desired operation
-        let numClear = 1;  //If true, clicking a number will clear the screen
+        let numClear = true;  //If true, clicking a number will clear the screen
 
         screen.textContent = '0'
 
@@ -205,29 +205,32 @@
                 }
                 numClear = 0;
                 screen.textContent += e.target.value;
+                lock = false
             });
         } //Prints operator on calculator screen and stores it as a variable
         for (let i = 0; i < operatorButtons.length; i++) {
                 operatorButtons[i].addEventListener('click', (e) => {
-                if (current > 0){
-                operate(current, operator, screen.textContent)
+                if (temp > 0 && !lock){
+                operate(temp, operator, screen.textContent)
                 }
                 if (screen.textContent != '0') {
                     numClear = 1;
-                    current = screen.textContent;
+                    temp = screen.textContent;
                     operatorScreen.textContent = ` ${e.target.value} `;
-                    operator = operatorScreen.textContent;
+                    operator = e.target.value;
+                    lock = true
                 }
             });
         }
         clearButton.addEventListener('click', () => {
-            screen.textContent = '0';
             operatorScreen.textContent = '';
-            current == '0'
+            screen.textContent = '0';
+            temp == 0;
             numClear = 1;
+            operator = 0;
         });
         equalsButton.addEventListener('click', () => {
-            operate(current, operator, screen.textContent)
+            operate(temp, operator, screen.textContent)
         })
         deleteButton.addEventListener('click', () => {
             if (screen.textContent.length == 1) {
@@ -250,23 +253,25 @@
         function operate(number1, operation, number2) {
             numClear = 1;
             operatorScreen.textContent = ''
-            if (operation == ' / ' && number2 == 0) {
+            if (operation == '/' && number2 == 0) {
                 screen.textContent = '(╯°□°）╯︵ ┻━┻';
             }
-            else if (operation === ' + ') {
+            else if (operation === '+') {
                 screen.textContent = Number(number1) + Number(number2);
             }
-            else if (operation === ' - ') {
+            else if (operation === '-') {
                 screen.textContent = Number(number1) - Number(number2);
             }
-            else if (operation === ' * ') {
+            else if (operation === '*') {
                 screen.textContent = Number(number1) * Number(number2);
             }
-            else if (operation === ' / ') {
-                screen.textContent = Number(number1) / Number(number2);
+            else if (operation === '/') {
+                screen.textContent = Number(number1) / Number(number2)
             }
-            current = 0;
+            temp = 0;
         }
+
+        
     </script>
 </body>
 
