@@ -20,10 +20,10 @@ for (let i = 0; i < numberButtons.length; i++) {
         if (numClear) {
             screen.textContent = '';
         }
-        if (screen.textContent.length < 11){
-        numClear = 0;
-        screen.textContent += e.target.value;
-        lock = false
+        if (screen.textContent.length < 11) {
+            numClear = 0;
+            screen.textContent += e.target.value;
+            lock = false
         }
     });
 } //Prints operator on calculator screen and stores it as a variable
@@ -52,7 +52,7 @@ equalsButton.addEventListener('click', () => {
     operate(temp, operator, screen.textContent)
 })
 deleteButton.addEventListener('click', () => {
-    if (screen.textContent.length == 1) {
+    if (screen.textContent.length == 1 || screen.textContent == 'Err.') {
         numClear = 1;
         screen.textContent = '0';
     }
@@ -76,16 +76,21 @@ function operate(number1, operation, number2) {
         screen.textContent = '(╯°□°）╯︵ ┻━┻';
     }
     else if (operation === '+') {
-        screen.textContent = Number(number1) + Number(number2);
+        answer = Number(number1) + Number(number2);
     }
     else if (operation === '-') {
-        screen.textContent = Number(number1) - Number(number2);
+        answer = number1 - number2;
     }
     else if (operation === '*') {
-        screen.textContent = Number(number1) * Number(number2);
+        answer = number1 * number2;
     }
     else if (operation === '/') {
-        screen.textContent = Number(number1) / Number(number2)
+        answer = Math.round((number1 / number2) * 1000) / 1000
     }
+    printAnswer(answer)
     temp = 0;
 }
+function printAnswer(answer) {
+    screen.textContent = answer.toString().length < 12 ? answer : 'Err.'
+}
+
