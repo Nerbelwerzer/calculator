@@ -74,6 +74,7 @@ function operate(number1, operation, number2) {
     operatorScreen.textContent = ''
     if (operation == '/' && number2 == 0) {
         screen.textContent = '(╯°□°）╯︵ ┻━┻';
+        return;
     }
     else if (operation === '+') {
         answer = Number(number1) + Number(number2);
