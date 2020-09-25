@@ -44,7 +44,7 @@ for (let i = 0; i < operatorButtons.length; i++) {
 clearButton.addEventListener('click', () => {
     operatorScreen.textContent = '';
     screen.textContent = '0';
-    temp == 0;
+    temp = 0;
     numClear = 1;
     operator = 0;
 });
@@ -74,6 +74,7 @@ function operate(number1, operation, number2) {
     operatorScreen.textContent = ''
     if (operation == '/' && number2 == 0) {
         screen.textContent = '(╯°□°）╯︵ ┻━┻';
+        current = 0;
         return;
     }
     else if (operation === '+') {
